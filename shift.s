@@ -31,7 +31,7 @@ _start:
   subq $1, %rdi
   movb $0, 0(%rdi)
   
-  leaq INPUT, %rdi
+  leaq BUFFER, %rdi
   movq $1, %rsi
   pushq %rdi
   call shift
