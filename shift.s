@@ -1,3 +1,6 @@
+  .bss
+BUFFER:
+  .space 256
   .data
 INPUT:
   .string "Hello world!\n\0"
@@ -19,6 +22,17 @@ ABOVE_LOWER:
 ;# Program entry point
 ;# TODO #1: rewrite this to read in a string from the user to use as input instead of "Hello world!"
 _start:
+  movq $0, %rax
+  movq $0, %rdi
+  leaq BUFFER, %rsi
+  movq $255, %rdx
+  syscall
+  
+  leaq BUFFER, %rdi
+  addq %rax, %rdi
+  subq $1, %rdi
+  movb $0, 0(%rdi)
+  
   leaq INPUT, %rdi
   movq $1, %rsi
   pushq %rdi
