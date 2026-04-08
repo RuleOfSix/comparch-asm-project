@@ -2,8 +2,6 @@
 BUFFER:
   .space 256
   .data
-INPUT:
-  .string "Hello world!\n\0"
 SIZE_ALPHA:
   .byte 26
 BELOW_UPPER:
