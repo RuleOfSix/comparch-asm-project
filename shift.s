@@ -93,11 +93,27 @@ shift_loop_cond:
 ;# rdi: value of character (in byte dil)
 ;# rsi: size of shift (between -25 and 25, inclusive)
 ;# rax after execution: shifted character
-;# currently this just always returns 'l' as a placeholder
 shift_lower:
   pushq %rbp
   movq %rsp, %rbp
-  movb $'l', %al
+
+  movb %dil, %al
+  subb $'a', %al
+
+  movsbl %al, %eax
+  addq %rsi, %rax
+
+  cmpq $0, %rax
+  jge shift_lower_not_negative
+  addq $26, %rax
+
+shift_lower_not_negative:
+  cmpq $26, %rax
+  jl shift_lower_after_wrapping
+  subq $26, %rax
+
+shift_lower_after_wrapping:
+  addq $'a', %rax
   popq %rbp
   ret
 
