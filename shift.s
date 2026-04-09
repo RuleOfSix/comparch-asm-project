@@ -3,7 +3,7 @@ BUFFER:
   .space 256
   .data
 SIZE_ALPHA:
-  .byte 26
+  .quad 26
 BELOW_UPPER:
   .byte 63
 TOP_UPPER:
