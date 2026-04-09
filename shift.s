@@ -126,9 +126,23 @@ shift_lower_after_wrapping:
 shift_upper:
   pushq %rbp
   movq %rsp, %rbp
-  movb $'U', %al
+
+  movb %dil, %al
+  addb %sil, %al
+
+  cmpb $90, %al
+  jle shift_upper_less_equal
+  subb $26, %al
+
+shift_upper_less_equal:
+  cmpb $65, %al
+  jge shift_upper_greater_equal
+  addb $26, %al
+
+shift_upper_greater_equal:
   popq %rbp
-  ret
+  ret 
+
 
 ;# prints null-terminated string to stdout
 ;# rdi: address of string
