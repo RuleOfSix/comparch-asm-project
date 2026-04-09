@@ -28,7 +28,6 @@ _start:
   
   leaq BUFFER, %rdi
   addq %rax, %rdi
-  subq $1, %rdi
   movb $0, 0(%rdi)
   
   leaq BUFFER, %rdi
